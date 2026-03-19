@@ -1,0 +1,1677 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>КЛАВА: КАК Я ПЕРЕСТАЛ БОЯТЬСЯ И ПОЛЮБИЛ AI</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css"
+    />
+
+    <style>
+      :root {
+        --neon-pink: #ff2d78;
+        --neon-cyan: #00f5ff;
+        --neon-green: #39ff14;
+        --neon-yellow: #fff200;
+        --neon-purple: #bf5fff;
+        --dark-bg: #0d0d1a;
+        --card-bg: rgba(255, 255, 255, 0.05);
+      }
+
+      .reveal {
+        font-family: "Segoe UI", "Arial", sans-serif;
+        font-size: 34px !important;
+      }
+
+      .reveal .slides section {
+        background: var(--dark-bg);
+        box-sizing: border-box;
+      }
+
+      /* Title slide */
+      .slide-title {
+        background: linear-gradient(
+          135deg,
+          #0d0d1a 0%,
+          #1a0a2e 50%,
+          #0a1a2e 100%
+        ) !important;
+      }
+
+      .slide-title h1 {
+        font-size: 2.4em !important;
+        background: linear-gradient(
+          90deg,
+          var(--neon-pink),
+          var(--neon-cyan),
+          var(--neon-purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: none;
+        line-height: 1.2;
+        margin-bottom: 0.3em;
+      }
+
+      .slide-title .subtitle {
+        color: var(--neon-yellow);
+        font-size: 1.1em;
+        font-style: italic;
+        opacity: 0.9;
+      }
+
+      .slide-title .author {
+        color: #aaa;
+        font-size: 0.7em;
+        margin-top: 0.8em;
+      }
+
+      /* Section slides */
+      .reveal h2 {
+        font-size: 1.2em !important;
+        color: var(--neon-cyan) !important;
+        text-shadow: 0 0 20px rgba(0, 245, 255, 0.5) !important;
+        margin-bottom: 0.3em !important;
+        margin-top: 0 !important;
+        text-transform: none !important;
+        line-height: 1.2 !important;
+      }
+
+      .reveal h3 {
+        font-size: 1.1em !important;
+        color: var(--neon-pink) !important;
+        text-shadow: 0 0 15px rgba(255, 45, 120, 0.5) !important;
+        text-transform: none !important;
+      }
+
+      /* Bullet lists */
+      .reveal ul {
+        list-style: none !important;
+        padding: 0 !important;
+      }
+
+      .reveal ul li {
+        padding: 0.15em 0 0.15em 1.5em !important;
+        position: relative !important;
+        font-size: 0.72em !important;
+        line-height: 1.35 !important;
+        color: #e0e0e0 !important;
+      }
+
+      .reveal ul li::before {
+        content: "▶" !important;
+        color: var(--neon-green) !important;
+        position: absolute !important;
+        left: 0 !important;
+        font-size: 0.7em !important;
+        top: 0.4em !important;
+      }
+
+      .reveal ul li strong {
+        color: var(--neon-yellow) !important;
+      }
+
+      .reveal ul li .bad {
+        color: var(--neon-pink) !important;
+      }
+
+      .reveal ul li .good {
+        color: var(--neon-green) !important;
+      }
+
+      /* Meme images */
+      .meme-img {
+        max-height: 220px !important;
+        max-width: 90% !important;
+        border: 2px solid var(--neon-cyan);
+        border-radius: 8px;
+        box-shadow:
+          0 0 30px rgba(0, 245, 255, 0.3),
+          0 0 60px rgba(0, 245, 255, 0.1);
+        display: block;
+        margin: 0 auto;
+      }
+
+      .meme-img-small {
+        max-height: 170px !important;
+        max-width: 100% !important;
+        border: 2px solid var(--neon-pink);
+        border-radius: 8px;
+        box-shadow: 0 0 25px rgba(255, 45, 120, 0.3);
+        display: block;
+        margin: 0 auto;
+      }
+
+      /* Two-column layout */
+      .two-col {
+        display: flex !important;
+        gap: 30px !important;
+        align-items: flex-start !important;
+        margin-top: 0.5em !important;
+      }
+
+      .two-col .col-img {
+        flex: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      .two-col .col-text {
+        flex: 1.2 !important;
+      }
+
+      /* Drake meme layout */
+      .drake-layout {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        margin-top: 0.5em;
+      }
+
+      .drake-layout img {
+        max-height: 300px;
+        border: 2px solid var(--neon-purple);
+        border-radius: 8px;
+        box-shadow: 0 0 25px rgba(191, 95, 255, 0.4);
+      }
+
+      .drake-layout .drake-text {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 1;
+      }
+
+      .drake-no {
+        background: rgba(255, 45, 120, 0.15);
+        border: 1px solid var(--neon-pink);
+        border-radius: 8px;
+        padding: 12px 15px;
+        font-size: 0.7em;
+        color: #ff8fa0;
+      }
+
+      .drake-yes {
+        background: rgba(57, 255, 20, 0.1);
+        border: 1px solid var(--neon-green);
+        border-radius: 8px;
+        padding: 12px 15px;
+        font-size: 0.7em;
+        color: #a0ffa0;
+      }
+
+      .drake-label {
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .drake-no .drake-label {
+        color: var(--neon-pink);
+      }
+      .drake-yes .drake-label {
+        color: var(--neon-green);
+      }
+
+      /* Highlight boxes */
+      .highlight-box {
+        background: rgba(255, 242, 0, 0.08);
+        border: 1px solid var(--neon-yellow);
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin: 0.5em 0;
+        font-size: 0.75em;
+        color: var(--neon-yellow);
+        text-align: center;
+      }
+
+      .warning-box {
+        background: rgba(255, 45, 120, 0.1);
+        border: 1px solid var(--neon-pink);
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin: 0.5em 0;
+        font-size: 0.75em;
+        color: #ffaacc;
+        text-align: center;
+      }
+
+      .success-box {
+        background: rgba(57, 255, 20, 0.08);
+        border: 1px solid var(--neon-green);
+        border-radius: 8px;
+        padding: 10px 15px;
+        margin: 0.5em 0;
+        font-size: 0.75em;
+        color: #aaff99;
+        text-align: center;
+      }
+
+      /* Progress indicator / slide number */
+      .reveal .progress {
+        color: var(--neon-cyan) !important;
+        height: 4px !important;
+      }
+
+      .reveal .progress span {
+        background: linear-gradient(
+          90deg,
+          var(--neon-pink),
+          var(--neon-cyan)
+        ) !important;
+      }
+
+      /* Slide counter */
+      .reveal .slide-number {
+        color: var(--neon-purple) !important;
+        background: rgba(13, 13, 26, 0.8) !important;
+        font-size: 14px !important;
+      }
+
+      /* Neon borders for some slides */
+      .neon-border-pink {
+        border: 2px solid var(--neon-pink) !important;
+        border-radius: 12px !important;
+        padding: 20px !important;
+        box-shadow: 0 0 30px rgba(255, 45, 120, 0.2) !important;
+      }
+
+      /* Emoji big */
+      .big-emoji {
+        font-size: 3em;
+        display: block;
+        text-align: center;
+        margin: 0.2em 0;
+      }
+
+      /* Caption under meme */
+      .meme-caption {
+        text-align: center;
+        font-size: 0.55em;
+        color: #888;
+        margin-top: 4px;
+        font-style: italic;
+      }
+
+      /* Expanding brain specific */
+      .brain-container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .brain-levels {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .brain-level {
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.65em;
+      }
+
+      .brain-level-1 {
+        background: rgba(100, 100, 100, 0.3);
+        border: 1px solid #666;
+        color: #aaa;
+      }
+      .brain-level-2 {
+        background: rgba(0, 150, 255, 0.15);
+        border: 1px solid #0096ff;
+        color: #88ccff;
+      }
+      .brain-level-3 {
+        background: rgba(191, 95, 255, 0.15);
+        border: 1px solid var(--neon-purple);
+        color: #ddaaff;
+      }
+      .brain-level-4 {
+        background: rgba(57, 255, 20, 0.15);
+        border: 1px solid var(--neon-green);
+        color: #aaff99;
+        font-weight: bold;
+      }
+
+      /* Spiderman pointing */
+      .point-row {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.5em;
+      }
+
+      .point-label {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 0.65em;
+        text-align: center;
+        border: 1px solid #444;
+        flex: 1;
+      }
+
+      /* Final slide */
+      .final-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 0.5em;
+      }
+
+      .final-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 0.65em;
+        border: 1px solid #333;
+      }
+
+      .final-card .card-title {
+        color: var(--neon-cyan);
+        font-weight: bold;
+        margin-bottom: 4px;
+        font-size: 1.1em;
+      }
+
+      /* Qwen slide */
+      .code-block {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--neon-green);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-family: "Courier New", monospace;
+        font-size: 0.6em;
+        color: var(--neon-green);
+        text-align: left;
+        margin: 0.5em 0;
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.1);
+      }
+
+      /* Animations */
+      @keyframes glitch {
+        0% {
+          text-shadow: 0 0 10px var(--neon-pink);
+        }
+        25% {
+          text-shadow:
+            -2px 0 var(--neon-cyan),
+            2px 0 var(--neon-pink);
+        }
+        50% {
+          text-shadow:
+            2px 0 var(--neon-green),
+            -2px 0 var(--neon-yellow);
+        }
+        75% {
+          text-shadow: 0 0 20px var(--neon-purple);
+        }
+        100% {
+          text-shadow: 0 0 10px var(--neon-pink);
+        }
+      }
+
+      @keyframes pulse-border {
+        0%,
+        100% {
+          border-color: var(--neon-cyan);
+          box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+        50% {
+          border-color: var(--neon-pink);
+          box-shadow: 0 0 30px rgba(255, 45, 120, 0.4);
+        }
+      }
+
+      .glitch-text {
+        animation: glitch 3s infinite;
+      }
+
+      .pulse-img {
+        animation: pulse-border 2s infinite;
+      }
+
+      .stat-number {
+        font-size: 2em;
+        font-weight: bold;
+        color: var(--neon-yellow);
+        display: block;
+        text-align: center;
+      }
+
+      .stat-label {
+        font-size: 0.6em;
+        color: #888;
+        display: block;
+        text-align: center;
+      }
+
+      .stats-row {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin: 0.5em 0;
+      }
+
+      .stat-box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 10px 20px;
+      }
+
+      /* Override reveal default white bg on code */
+      .reveal pre code {
+        background: transparent !important;
+        color: var(--neon-green) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- ================================================================
+         SLIDE 1: TITLE
+         ================================================================ -->
+        <section class="slide-title" data-transition="zoom">
+          <h1 class="glitch-text">
+            КЛАВА:<br />КАК Я ПЕРЕСТАЛ БОЯТЬСЯ<br />И ПОЛЮБИЛ AI
+          </h1>
+          <p class="subtitle">
+            или: история одного разработчика, двух пет-проектов<br />и
+            нескольких недель потерянного времени
+          </p>
+          <div style="margin-top: 1em">
+            <img
+              src="memes/surprised-pikachu.png"
+              style="
+                max-height: 220px;
+                border-radius: 12px;
+                border: 2px solid #bf5fff;
+                box-shadow: 0 0 40px rgba(191, 95, 255, 0.4);
+                display: block;
+                margin: 0 auto;
+              "
+              alt="Surprised Pikachu"
+            />
+            <p class="meme-caption">
+              Я, когда Клава написала рабочий код с первого раза
+            </p>
+          </div>
+          <p class="author">
+            © Лысый алкаш | 2026 | Доклад на тему «Ёбаные AI-агенты в
+            разработке»
+          </p>
+          <aside class="notes">
+            Добрый день, дорогие коллеги! Сегодня я расскажу вам о том, как
+            провёл отпуск продуктивнее, чем все рабочие недели вместе взятые.
+            Поехали.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 2: Что такое AI-агенты, блядь
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>🤖 Не эльфы Санты, блядь</h2>
+          <div class="two-col">
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/one-does-not-simply.jpg"
+                  class="meme-img-small pulse-img"
+                  alt="One Does Not Simply"
+                />
+                <p class="meme-caption">
+                  One does not simply<br />назвать автокомплит «AI-агентом»
+                </p>
+              </div>
+            </div>
+            <div class="col-text">
+              <ul>
+                <li>
+                  <strong>НЕ это:</strong>
+                  <span class="bad">умный автокомплит</span>, который знали ещё
+                  до рождения некоторых из присутствующих
+                </li>
+                <li>
+                  <strong>ЭТО:</strong>
+                  <span class="good">полноценный агент</span> — мыслит,
+                  планирует, выполняет задачи, запускает команды
+                </li>
+                <li>
+                  Работает на
+                  <strong>специализированных мощных серверах</strong>, а не на
+                  вашем ноутбуке с перегревом
+                </li>
+                <li>
+                  Конкретно я <strong>плотно поигрался с Claude</strong> (в
+                  народе —
+                  <span style="color: var(--neon-purple)">«Клава»</span>)
+                </li>
+              </ul>
+              <div class="warning-box">
+                ⚠️ Важно: жителям РФ официально нельзя.<br />
+                Неофициально — всё прекрасно работает.
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Первый важный момент: не путайте AI-агентов с тем убожеством,
+            которое вам предлагали 5 лет назад. Это совершенно другой уровень.
+            Мы говорим о системе, которая может самостоятельно читать файлы,
+            запускать тесты, делать git-коммиты, и вообще делать всё, что может
+            делать разработчик в терминале.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 3: Гигачат: НЕОЖИДАННО
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>💪 Гигачат: НЕОЖИДАННО НОРМ</h2>
+          <div class="two-col">
+            <div class="col-text">
+              <ul>
+                <li>
+                  Начал <span class="bad">не с Клавы</span> — узнал что
+                  <strong>Сбербанк даёт Гигачат бесплатно</strong>, даже
+                  VSCode-плагин есть
+                </li>
+                <li>
+                  Первая задача: <strong>«напиши JSDoc к этой функции»</strong>
+                </li>
+                <li>
+                  Ожидал говно — получил
+                  <span class="good">отличный результат</span>: аргументы, типы,
+                  описание, примеры
+                </li>
+                <li>10 минут ручной работы → <strong>1 минута с AI</strong></li>
+                <li>
+                  Результат ревью PR:
+                  <span class="good">AI нашёл реальные баги</span>, которые я
+                  сам не заметил (замыленный глаз)
+                </li>
+              </ul>
+            </div>
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/giga-chad.jpg"
+                  class="meme-img-small"
+                  alt="Giga Chad"
+                />
+                <p class="meme-caption">
+                  Гигачат Гигабанка<br />когда справился с задачей
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="highlight-box">
+            💡 AI не устаёт и беспристрастен — идеальный ревьюер кода
+          </div>
+          <aside class="notes">
+            Моё знакомство с AI-агентами началось с Гигачата от Сбербанка.
+            Честно говоря, я не ожидал многого от продукта компании, которая
+            умудрилась назвать его «Гига». Но блин, я был приятно удивлён. JSDoc
+            написал лучше, чем я пишу сам, когда мне лень.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 4: PR Review
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>👀 PR Review: AI не устаёт смотреть на твоё дерьмо</h2>
+          <div class="two-col">
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/monkey-puppet.jpg"
+                  class="meme-img-small"
+                  alt="Monkey Puppet"
+                />
+                <p class="meme-caption">
+                  Я, когда ревьюирую<br />свой же PR через неделю
+                </p>
+              </div>
+            </div>
+            <div class="col-text">
+              <ul>
+                <li>
+                  <span class="bad">Проблема:</span> ревьюить свой код — пытка.
+                  <strong>Глаз замылен</strong>, мозг помнит «как должно быть» и
+                  не видит «как есть»
+                </li>
+                <li>
+                  <span class="good">AI-решение:</span> агент читает код
+                  <strong>без предвзятости</strong> и без желания побыстрее
+                  закрыть PR
+                </li>
+                <li>Да, отмечает очевидное, обусловленное наследием</li>
+                <li>
+                  НО иногда находит
+                  <strong>реальные логические ошибки</strong> и недостаточные
+                  валидации
+                </li>
+                <li>
+                  Ошибки, которые <span class="good">я бы поймал сам</span>...
+                  если бы заметил
+                </li>
+              </ul>
+              <div class="success-box">
+                ✅ AI не засыпает на 50-м файле и не думает «да ладно, и так
+                сойдёт»
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Ревью своего PR — это вообще отдельная форма самоистязания. Ты
+            смотришь на код, который сам написал, и видишь именно то, что хотел
+            написать, а не то, что написал. AI такой проблемы не имеет.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 5: Телеграм - пет-проект
+         ================================================================ -->
+        <section data-transition="convex">
+          <h2>📱 Телеграм: 1000 каналов с мемасиками (и дубляжом)</h2>
+          <div class="two-col">
+            <div class="col-text">
+              <ul>
+                <li>
+                  Подписан на <strong>миллион каналов</strong> с мемами,
+                  новостями, нейрослопом
+                </li>
+                <li>
+                  Проблема: одна новость — <strong>репостится везде</strong>.
+                  Инстасамка поссорилась с кем-то → 50 одинаковых постов
+                </li>
+                <li>
+                  Один мем с <span class="bad">всратым котом</span> — появляется
+                  ежедневно на 30 каналах
+                </li>
+                <li>
+                  Мечта: <strong>гномик-бот</strong>, который читает всё,
+                  репостит в одно место, убирает дубли и рекламу
+                </li>
+                <li>
+                  К снаряду подходил <span class="bad">несколько раз</span> —
+                  протокол телеги исторически <strong>запутан и страшен</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/this-is-fine.png"
+                  class="meme-img-small"
+                  alt="This is fine"
+                />
+                <p class="meme-caption">
+                  API Telegram и я,<br />пытаюсь разобраться в вкладках каналов
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Идея простая: хочу получать уникальный контент из телеги, без
+            дубляжа и спама. Казалось бы, несложно. Но телеграмовский протокол
+            MTProto — это настоящий артефакт из прошлого, где каждая новая фича
+            добавлялась поверх предыдущей, как слои краски на деревенском
+            заборе.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 6: Два дня вайб-кодинга
+         ================================================================ -->
+        <section data-transition="convex">
+          <h2>🚀 Два дня вайб-кодинга: от нуля до продакшена</h2>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-bottom: 0.5em;
+            "
+          >
+            <img
+              src="memes/hackerman.jpg"
+              class="meme-img"
+              style="max-height: 260px"
+              alt="Hackerman"
+            />
+            <p class="meme-caption">Я во время вайб-кодинга с Клавой</p>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <span class="stat-number">2</span>
+              <span class="stat-label">дня отпуска</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">∞</span>
+              <span class="stat-label">итераций с AI</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">1</span>
+              <span class="stat-label">рабочий проект</span>
+            </div>
+          </div>
+          <ul style="margin-top: 0.3em">
+            <li>
+              <strong>Результат:</strong> рабочее приложение —
+              <span class="good"
+                >отрефакторенное, с дашбордом, настройками и LLM для детекции
+                рекламы</span
+              >
+            </li>
+            <li>
+              Иногда Клава шуршала 10 минут и всё
+              <span class="bad">ломала</span>. Но я всё равно двигался вперёд.
+              <strong>Очень быстро.</strong>
+            </li>
+          </ul>
+          <aside class="notes">
+            Вайб-кодинг — это особая медитация. Ты сидишь с кофе, описываешь
+            задачу, смотришь как Клава что-то делает, иногда материшься, иногда
+            восхищаешься. Два дня — и у меня есть то, на что раньше ушли бы
+            недели.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 7: Почта - 2000 писем
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>📧 Почта: 2000 писем в день (99% — полная хуйня)</h2>
+          <div class="two-col">
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/distracted-boyfriend.jpg"
+                  class="meme-img-small"
+                  alt="Distracted Boyfriend"
+                />
+                <p class="meme-caption">
+                  Я: [уставший девелопер]<br />Спам: [30-летняя почта]<br />Мечта:
+                  [кнопка «УДАЛИТЬ К ЧЕРТЯМ»]
+                </p>
+              </div>
+            </div>
+            <div class="col-text">
+              <ul>
+                <li>
+                  Почта существует <strong>15+ лет</strong>, письма не удаляю —
+                  пришло <span class="bad">~2000 в день, 99% спам</span>
+                </li>
+                <li>
+                  Есть папки и правила — но создавать их
+                  <strong>больно и мучительно</strong> в любом клиенте
+                </li>
+                <li>
+                  Инбокс постоянно переполнен, потому что
+                  <span class="bad">некогда настраивать новые правила</span>
+                </li>
+                <li>
+                  Мечта: кнопка <strong>«Создать правило»</strong> прямо в
+                  письме с автозаполнением формы
+                </li>
+              </ul>
+              <div class="warning-box">
+                💀 Желаемое действие: «УДАЛИТЬ К ЧЕРТЯМ СОБАЧЬИМ<br />И НАВСЕГДА
+                ЗАБАНИТЬ ЭТОТ АДРЕС ЁБУЧИЙ»
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Второй пет-проект — почтовый клиент с человеческим лицом. Задача
+            кажется простой, но любой, кто пробовал написать IMAP-клиент, знает
+            что это дорога в ад. Клава помогла пройти этот путь значительно
+            быстрее.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 8: Верный вопрос (Шекли)
+         ================================================================ -->
+        <section data-transition="fade">
+          <h2>📚 Верный ответ — это Верный Вопрос (с) Р.Шекли</h2>
+          <div class="two-col">
+            <div class="col-text">
+              <ul>
+                <li>
+                  Рассказ <strong>«Верный вопрос»</strong> — сверхразум построил
+                  Ответчик, знающий всё
+                </li>
+                <li>
+                  Проблема:
+                  <span class="bad"
+                    >чтобы правильно задать вопрос — нужно знать большую часть
+                    ответа</span
+                  >
+                </li>
+                <li>
+                  С AI <strong>то же самое</strong>: чёткая задача → быстрый
+                  качественный результат
+                </li>
+                <li>
+                  Размытое описание →
+                  <span class="bad"
+                    >хуйня на выходе, долгое ожидание, слитые токены</span
+                  >
+                </li>
+              </ul>
+              <div class="highlight-box">
+                🎯 Промпт — это не магия.<br />Это
+                <strong>техническое задание для джуна</strong>,<br />у которого
+                нет инициативы.
+              </div>
+            </div>
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/ancient-aliens.jpg"
+                  class="meme-img-small"
+                  alt="Ancient Aliens"
+                />
+                <p class="meme-caption">
+                  «Я не знаю, как описать задачу,<br />но это точно AI виноват»
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Шекли написал эту историю в 1954 году, но она как будто про 2025-й.
+            Если вы не можете чётко объяснить задачу человеку — AI тоже не
+            поймёт. Только разница в том, что человек переспросит, а Клава
+            начнёт уверенно делать что-то совершенно другое.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 9: Плохой промпт vs хороший промпт (Drake meme)
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>✍️ Плохой промпт vs Хороший промпт</h2>
+          <div class="drake-layout">
+            <img
+              src="memes/drake.png"
+              alt="Drake meme"
+              style="
+                max-height: 320px;
+                border-radius: 8px;
+                border: 2px solid #bf5fff;
+              "
+            />
+            <div class="drake-text">
+              <div class="drake-no">
+                <div class="drake-label">❌ ДРЕЙК ПРОТИВ (Клава страдает):</div>
+                «Сделай мне телеграм-бота»<br />
+                «Добавь авторизацию»<br />
+                «Исправь баги в проекте»<br />
+                «Напиши что-нибудь для фронтенда»
+              </div>
+              <div class="drake-yes">
+                <div class="drake-label">✅ ДРЕЙК ЗА (Клава кайфует):</div>
+                «В файле <code>src/bot.py</code> функция
+                <code>handle_message()</code> не обрабатывает пустые сообщения —
+                добавь проверку и верни "Введи текст"»<br /><br />
+                «В <code>auth.js:145</code> — JWT не обновляется при истечении.
+                Исправь с помощью refresh-токена по схеме из
+                <code>docs/auth.md</code>»
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Ключевой навык при работе с AI — умение декомпозировать задачу на
+            мелкие, чёткие шаги. Это, кстати, полезный навык вообще в
+            разработке. Можно считать, что AI помогает нам думать
+            структурированнее.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 10: Проклятие контекста
+         ================================================================ -->
+        <section data-transition="zoom">
+          <h2>💀 Проклятие Контекста: выбирай смерть</h2>
+          <div class="brain-container">
+            <img
+              src="memes/expanding-brain.jpg"
+              alt="Expanding Brain"
+              style="
+                max-height: 320px;
+                border-radius: 8px;
+                border: 2px solid var(--neon-purple);
+                box-shadow: 0 0 25px rgba(191, 95, 255, 0.3);
+              "
+            />
+            <div class="brain-levels">
+              <div class="brain-level brain-level-1">
+                🐣 <strong>Базовый уровень:</strong> Очищать контекст каждый раз
+                → Клава тебя не помнит → объясняй всё с нуля как джуну в
+                понедельник
+              </div>
+              <div class="brain-level brain-level-2">
+                🧠 <strong>Продвинутый:</strong> Не очищать сессию → Клава
+                понимает с полуслова → но токены заканчиваются быстро
+              </div>
+              <div class="brain-level brain-level-3">
+                🚀 <strong>Большой мозг:</strong> Балансировать контекст вручную
+                → добавлять CLAUDE.md с описанием проекта → регулярно сжимать
+                историю
+              </div>
+              <div class="brain-level brain-level-4">
+                🌌 <strong>ГАЛАКТИЧЕСКИЙ МОЗГ:</strong> Принять что оба варианта
+                — пиздец, и смириться
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Это, пожалуй, самое большое техническое ограничение AI-агентов.
+            Контекстное окно конечно. Если не чистить — скоро закончится. Если
+            чистить — теряешь накопленное понимание проекта. Золотая середина —
+            файл с описанием проекта, который Клава читает в начале каждой
+            сессии.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 11: Контроль vs Скорость
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>⚡ Контроль vs Скорость: ВЫБИРАЙ, СУКА</h2>
+          <div class="two-col">
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/this-is-fine.png"
+                  class="meme-img-small"
+                  alt="This is fine"
+                  style="max-height: 240px"
+                />
+                <p class="meme-caption">
+                  Я, когда разрешил Клаве<br />«все похожие команды»
+                </p>
+              </div>
+            </div>
+            <div class="col-text">
+              <ul>
+                <li>
+                  <strong>По умолчанию:</strong> каждое действие требует
+                  подтверждения
+                </li>
+                <li>
+                  Через 20 минут ты просто
+                  <span class="bad">жмёшь Enter каждые 10 секунд</span>, иногда
+                  даже не читая
+                </li>
+                <li>
+                  Потом разрешаешь <strong>«все похожие команды»</strong>...
+                </li>
+                <li>
+                  ...и через 15 минут Клава
+                  <span class="bad"
+                    >самостоятельно патчит что-то в node_modules</span
+                  >
+                </li>
+                <li>
+                  Или
+                  <span class="bad">находит «баг» в ядре ОС</span>
+                  (воображаемый)
+                </li>
+              </ul>
+              <div class="warning-box">
+                ☠️ В худшем случае: удаление всех ваших данных.<br />
+                Это не шутка. Бэкапы — не опция.
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Я лично видел как Клава начала редактировать файлы в node_modules,
+            потому что решила что проблема там. Она была уверена. Она была
+            неправа. Главное правило: никогда не разрешайте "все похожие
+            команды" без понимания что именно будет делаться. Хотя бы иногда
+            читайте что она предлагает.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 12: Галлюцинации
+         ================================================================ -->
+        <section data-transition="convex">
+          <h2>🤪 Галлюцинации: она полезла в node_modules, блядь</h2>
+          <div style="text-align: center; margin-bottom: 0.4em">
+            <img
+              src="memes/hackerman.jpg"
+              style="
+                max-height: 200px;
+                border-radius: 8px;
+                border: 2px solid var(--neon-pink);
+                box-shadow: 0 0 25px rgba(255, 45, 120, 0.3);
+                opacity: 0.85;
+              "
+              alt="Hackerman"
+            />
+            <p class="meme-caption">
+              Клава: «Я нашла баг в зависимости 0.3.14.legacy.patch»
+            </p>
+          </div>
+          <ul>
+            <li>
+              Даёшь задачу: <strong>«починить конкретный баг»</strong>,
+              описываешь как воспроизвести
+            </li>
+            <li>
+              Клава: сканирует твой код... лезет в <code>node_modules</code>...
+              читает <span class="bad">обфусцированный код</span>...
+            </li>
+            <li>
+              Вывод: <strong>«виноват баг в зависимости X»</strong> — начинает
+              её успешно патчить
+            </li>
+            <li>
+              Реальный баг?
+              <span class="bad">Где-то совсем в другом месте.</span> Клава его
+              даже не смотрела.
+            </li>
+            <li>
+              Причина: LLM — <strong>не интеллект</strong>, это предсказание
+              следующего токена по контексту
+            </li>
+          </ul>
+          <div class="warning-box">
+            🧠 Правило: если Клава уверенно идёт не туда —
+            <strong>прерывай немедленно</strong>.<br />
+            Не жди 15 минут работы впустую.
+          </div>
+          <aside class="notes">
+            Галлюцинации — это когда AI очень уверенно делает что-то совершенно
+            не то. Самое коварное — она выглядит убедительно. Читает код, делает
+            выводы, предлагает "решение". Только решение это от другой задачи.
+            Всегда держите руку на пульсе.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 13: Технический долг
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>🗑️ Технический долг копится, сука</h2>
+          <div class="two-col">
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/spiderman-pointing.jpg"
+                  class="meme-img-small"
+                  alt="Spiderman Pointing"
+                />
+                <p class="meme-caption">
+                  Клава и технический долг<br />указывают друг на друга
+                </p>
+              </div>
+            </div>
+            <div class="col-text">
+              <ul>
+                <li>
+                  Клава <span class="bad">сама не будет рефакторить</span>,
+                  писать тесты, удалять мёртвый код
+                </li>
+                <li>
+                  Если явно не требовать — всё идёт в <strong>один файл</strong>
+                </li>
+                <li>
+                  Итог без контроля:
+                  <span class="bad">40к строк в одном файле</span>, никаких
+                  тестов, дублирование везде
+                </li>
+                <li>
+                  <strong>Решение:</strong> регулярно давать задачи на
+                  рефакторинг и написание тестов
+                </li>
+                <li>Или сразу ставить правила в <code>CLAUDE.md</code></li>
+              </ul>
+              <div class="point-row" style="margin-top: 0.5em">
+                <div
+                  class="point-label"
+                  style="
+                    background: rgba(255, 45, 120, 0.1);
+                    border-color: var(--neon-pink);
+                    color: #ffaacc;
+                  "
+                >
+                  ❌ «сделай быстрее»
+                </div>
+                <div style="font-size: 1.5em; color: var(--neon-yellow)">→</div>
+                <div
+                  class="point-label"
+                  style="
+                    background: rgba(57, 255, 20, 0.1);
+                    border-color: var(--neon-green);
+                    color: #aaff99;
+                  "
+                >
+                  ✅ «сделай правильно +<br />напиши тесты»
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Это как работать с джуном, у которого нет внутреннего стандарта
+            качества. Если не указать явно — сделает работающее дерьмо. Нужно
+            явно требовать: тесты, рефакторинг, разбивку на модули. Иначе
+            получите код, который работает, но никто кроме Клавы не поймёт.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 14: Потеря владения кодом
+         ================================================================ -->
+        <section data-transition="fade">
+          <h2>🧠 Потеря владения кодом: система 1 vs система 2</h2>
+          <div class="two-col">
+            <div class="col-text">
+              <ul>
+                <li>
+                  По <strong>Канеману</strong>: Система 1 — быстрая и дешёвая.
+                  Система 2 — осознанная, но дорогая.
+                </li>
+                <li>
+                  <span class="bad">Велик соблазн:</span> не ревьюить то, что
+                  Клава написала
+                </li>
+                <li>
+                  Если не ревьюить —
+                  <strong>ты не понимаешь свой собственный код</strong>
+                </li>
+                <li>
+                  Через месяц:
+                  <span class="bad">«что это вообще делает?»</span> — о своём же
+                  проекте
+                </li>
+                <li>
+                  <strong>Решение:</strong> всегда читать и понимать изменения.
+                  Всегда.
+                </li>
+              </ul>
+              <div class="warning-box">
+                ☠️ Самая большая опасность AI-разработки:<br />
+                не ошибки в коде, а <strong>потеря понимания</strong> того что
+                происходит
+              </div>
+            </div>
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/wait-illegal.jpg"
+                  class="meme-img-small"
+                  alt="Wait thats illegal"
+                  style="max-height: 200px"
+                />
+                <p class="meme-caption">
+                  «Подождите, это же<br />мой собственный код?!»
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Это самое страшное. Вы создаёте рабочий код, но не понимаете как он
+            работает. Потом что-то ломается, вы идёте к Клаве, она что-то чинит,
+            вы снова не понимаете. Это цикл потери владения. Выход один: читать
+            и понимать каждое изменение, даже если это скучно.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 15: Зеркалирование
+         ================================================================ -->
+        <section data-transition="zoom">
+          <h2>🪞 Зеркалирование: говно войдёт — говно выйдет</h2>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-bottom: 0.5em;
+            "
+          >
+            <img
+              src="memes/woman-yelling-cat.jpg"
+              class="meme-img"
+              style="max-height: 250px"
+              alt="Woman Yelling At Cat"
+            />
+            <p class="meme-caption">
+              Я: «Клава, почему код такой
+              кривой?»&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Клава: «Я читала твой
+              проект»
+            </p>
+          </div>
+          <ul>
+            <li>
+              Клава
+              <strong>всегда сначала читает существующий код</strong> проекта —
+              изучает стиль и парадигму
+            </li>
+            <li>
+              Если проект <span class="bad">написан криво</span> — ожидать
+              структурированного кода наивно
+            </li>
+            <li>
+              AI <strong>зеркалит</strong> существующий стиль, включая все
+              анти-паттерны
+            </li>
+            <li>
+              Это работает и в обратную сторону:
+              <span class="good"
+                >хороший код в проекте → хороший код от AI</span
+              >
+            </li>
+          </ul>
+          <div class="highlight-box">
+            🗑️ GIGO принцип для AI: Garbage In — Garbage Out.<br />
+            Убери говно из проекта <strong>до</strong> того как пустить туда
+            Клаву.
+          </div>
+          <aside class="notes">
+            Это как с новым сотрудником: если в компании принято писать
+            спагетти-код с комментариями "хуй знает почему это работает" —
+            новичок подстроится. Клава делает то же самое. Поэтому сначала
+            рефакторинг, потом AI.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 16: Энтропия — пиздец подкрался незаметно
+         ================================================================ -->
+        <section data-transition="convex">
+          <h2>🔥 Энтропия: пиздец подкрался незаметно</h2>
+          <div class="two-col">
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/this-is-fine.jpeg"
+                  class="meme-img-small"
+                  style="max-height: 200px"
+                  alt="This is fine"
+                />
+                <p class="meme-caption">
+                  Продуктивность x10, энтропия x100.<br />Всё по плану.
+                </p>
+              </div>
+              <div class="warning-box" style="margin-top: 0.4em">
+                ☠️ AI не решает фундаментальные проблемы —<br />
+                он их <strong>ускоряет нахуй</strong>
+              </div>
+            </div>
+            <div class="col-text">
+              <div style="display: flex; flex-direction: column; gap: 6px">
+                <div
+                  class="brain-level brain-level-1"
+                  style="
+                    border-color: var(--neon-pink);
+                    background: rgba(255, 45, 120, 0.1);
+                  "
+                >
+                  🔒 <strong>Path Dependence:</strong> ранние костыли
+                  бетонируются навечно. AI хуячит поверх них ещё быстрее — и
+                  теперь это <em>легаси в кубе</em>
+                </div>
+                <div
+                  class="brain-level brain-level-2"
+                  style="
+                    border-color: var(--neon-yellow);
+                    background: rgba(255, 242, 0, 0.08);
+                  "
+                >
+                  ⚔️ <strong>Конфликт фидбэков:</strong> одна команда чинит
+                  баги, другая пилит фичи. AI ускоряет <em>обе стороны</em> —
+                  хаос растёт экспоненциально
+                </div>
+                <div class="brain-level brain-level-3">
+                  💣 <strong>Отложенный пиздец:</strong> проблемы со скейлом,
+                  гнилые данные, техдолг — вылезают <em>потом</em>. AI генерит
+                  код быстрее, чем ты замечаешь что всё сломано
+                </div>
+                <div
+                  class="brain-level brain-level-4"
+                  style="
+                    border-color: var(--neon-pink);
+                    background: rgba(255, 45, 120, 0.12);
+                    color: #ffaacc;
+                  "
+                >
+                  🧠 <strong>Кривые ментальные модели:</strong> 5 разрабов с AI
+                  = <em>100 джунов</em> с разным пониманием системы. Каждый
+                  уверен что прав. Никто не прав.
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Статья Subbu Allamaraju "Productivity and Entropy" точно формулирует
+            то, что мы все чувствуем. Фредерик Брукс писал "No Silver Bullet" в
+            86-м году — AI тоже не серебряная пуля. Он усиливает и хорошее, и
+            плохое. Если у вас бардак — AI сделает бардак быстрее. Если порядок
+            — ускорит порядок. Выбор за вами.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 17: Клава-девопс
+         ================================================================ -->
+        <section data-transition="slide">
+          <h2>🚀 Клава-девопс: 10 минут до прода</h2>
+          <div class="two-col">
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/hackerman.jpg"
+                  class="meme-img-small"
+                  alt="Hackerman"
+                  style="max-height: 230px"
+                />
+                <p class="meme-caption">
+                  Клава настраивает nginx<br />на твоём сервере
+                </p>
+              </div>
+            </div>
+            <div class="col-text">
+              <ul>
+                <li>
+                  Клава <span class="good">отлично заменяет девопса</span> на
+                  небольшом проекте
+                </li>
+                <li>
+                  Говоришь: «вот SSH-креды, поставь nginx + postgres, задеплой
+                  проект, запроси сертификат у certbot»
+                </li>
+                <li>
+                  <strong>Результат через 5-10 минут:</strong> рабочий скрипт
+                  для деплоя и живой проект на проде
+                </li>
+              </ul>
+              <div class="code-block">
+                $ claude "у тебя есть SSH к серверу 1.2.3.4<br />поставь nginx,
+                postgres, задеплой мой Flask-проект<br />домен:
+                myapp.example.com<br />не облажайся"<br /><br /><span
+                  style="color: var(--neon-yellow)"
+                  ># 8 минут спустя: https://myapp.example.com ✅</span
+                >
+              </div>
+              <div class="success-box">
+                ✅ Не нужно гуглить «как установить nginx 2025»<br />
+                в 11 вечера перед релизом
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Это буквально магия. Я дал Клаве доступ к серверу и через 10 минут у
+            меня был работающий HTTPS-сайт с сертификатом Let's Encrypt. Обычно
+            у меня на это уходит час с гуглежом и тремя попытками.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 17: ИТОГО - неолуддизм
+         ================================================================ -->
+        <section data-transition="convex">
+          <h2>🎯 ИТОГО: хватит быть неолуддитом</h2>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-bottom: 0.3em;
+            "
+          >
+            <img
+              src="memes/surprised-pikachu.png"
+              class="meme-img"
+              style="max-height: 200px"
+              alt="Surprised Pikachu"
+            />
+            <p class="meme-caption">
+              Я после того как понял что AI реально полезен
+            </p>
+          </div>
+          <div class="final-grid">
+            <div class="final-card">
+              <div class="card-title">✅ AI — это инструмент</div>
+              Как IDE, как grep, как git. Тот кто не освоит —
+              <strong>потеряет в конкурентоспособности</strong>.
+            </div>
+            <div class="final-card">
+              <div class="card-title">✅ Порядок производительности</div>
+              Повышение в 10x реально, если ставить задачи правильно.
+            </div>
+            <div class="final-card">
+              <div class="card-title">🛡️ Джун с Клавой не страшен</div>
+              Если у тебя тоже есть Клава. У тебя есть опыт + AI, у джуна —
+              только AI.
+            </div>
+            <div class="final-card">
+              <div class="card-title">⚠️ Но контроль обязателен</div>
+              Рецензируй код. Понимай что происходит. Не давай Клаве делать
+              деплой без бэкапа.
+            </div>
+          </div>
+          <aside class="notes">
+            Мой скептицизм был неолуддизмом. Я боялся что AI заменит
+            разработчиков. На самом деле AI — это усилитель опыта. Опытный
+            разработчик с AI будет делать в 10 раз больше. Джун с AI будет
+            делать в 3 раза больше ошибок.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 18: Qwen локально
+         ================================================================ -->
+        <section data-transition="zoom" data-background="#0a0a1a">
+          <h2>💸 Qwen локально: халява нищебродов</h2>
+          <div class="two-col">
+            <div class="col-text">
+              <ul>
+                <li>
+                  Клава <span class="bad">дорогая</span> — Anthropic хочет
+                  реальных денег за токены
+                </li>
+                <li>
+                  Можно запустить <strong>qwen-coder</strong> локально через
+                  Ollama/LMStudio
+                </li>
+                <li>
+                  Настроить Claude Code так, чтобы он
+                  <strong>обращался к локальной модели</strong> вместо Anthropic
+                </li>
+                <li>
+                  Цена: <span class="good">стоимость электричества</span> +
+                  нагрев GPU
+                </li>
+                <li>
+                  Качество: <span class="bad">хуже</span>, но для простых задач
+                  — <span class="good">вполне ок</span>
+                </li>
+              </ul>
+              <div class="code-block">
+                # ~/.claude/settings.json<br />{<br />
+                "baseURL": "http://localhost:11434/v1",<br />
+                "model": "qwen2.5-coder:32b",<br />
+                "apiKey": "ollama"<br />}<br /><br /><span
+                  style="color: var(--neon-yellow)"
+                  ># Profit! Клава теперь бесплатная</span
+                >
+              </div>
+            </div>
+            <div class="col-img">
+              <div>
+                <img
+                  src="memes/giga-chad.jpg"
+                  class="meme-img-small"
+                  alt="Giga Chad"
+                  style="max-height: 220px"
+                />
+                <p class="meme-caption">
+                  Я, запустивший Qwen32B<br />на локальном железе
+                </p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Бонусный лайфхак: если не хочется платить Anthropic — можно
+            запустить Qwen Coder локально. Я пробовал — работает, хотя и
+            медленнее, и немного тупее. Для рутинных задач достаточно. Для
+            сложной архитектуры — лучше платная Клава.
+          </aside>
+        </section>
+
+        <!-- ================================================================
+         SLIDE 19: КОНЕЦ
+         ================================================================ -->
+        <section data-transition="zoom" class="slide-title">
+          <h1 style="font-size: 2em !important">ВОПРОСЫ?</h1>
+          <div style="margin: 0.5em 0 0.3em">
+            <img
+              src="memes/spiderman-pointing.jpg"
+              style="
+                max-height: 260px;
+                border-radius: 12px;
+                border: 2px solid var(--neon-yellow);
+                box-shadow: 0 0 40px rgba(255, 242, 0, 0.3);
+                display: block;
+                margin: 0 auto;
+              "
+              alt="Spiderman Pointing"
+            />
+            <p class="meme-caption">
+              Вы и ваш коллега когда оба используете одну и ту же Клаву
+            </p>
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 20px;
+              justify-content: center;
+              margin-top: 0.5em;
+              flex-wrap: wrap;
+            "
+          >
+            <div
+              style="
+                background: rgba(0, 245, 255, 0.1);
+                border: 1px solid var(--neon-cyan);
+                border-radius: 8px;
+                padding: 8px 16px;
+                font-size: 0.65em;
+                color: var(--neon-cyan);
+              "
+            >
+              🤖 Claude Code — основной инструмент
+            </div>
+            <div
+              style="
+                background: rgba(57, 255, 20, 0.1);
+                border: 1px solid var(--neon-green);
+                border-radius: 8px;
+                padding: 8px 16px;
+                font-size: 0.65em;
+                color: var(--neon-green);
+              "
+            >
+              🐧 Qwen Coder — для экономных
+            </div>
+            <div
+              style="
+                background: rgba(255, 242, 0, 0.1);
+                border: 1px solid var(--neon-yellow);
+                border-radius: 8px;
+                padding: 8px 16px;
+                font-size: 0.65em;
+                color: var(--neon-yellow);
+              "
+            >
+              📖 CLAUDE.md — ваш друг
+            </div>
+            <div
+              style="
+                background: rgba(255, 45, 120, 0.1);
+                border: 1px solid var(--neon-pink);
+                border-radius: 8px;
+                padding: 8px 16px;
+                font-size: 0.65em;
+                color: #ffaacc;
+              "
+            >
+              💾 Бэкапы — не опция, блядь
+            </div>
+          </div>
+          <p class="subtitle" style="margin-top: 0.8em; font-size: 0.85em">
+            Спасибо за внимание! Теперь идите писать <code>CLAUDE.md</code>
+          </p>
+          <aside class="notes">
+            Спасибо всем! Если есть вопросы — задавайте. Особенно интересны
+            вопросы в духе "а как вы вообще это запустили в РФ" — на них отвечу
+            индивидуально, после конференции.
+          </aside>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        history: true,
+        controls: true,
+        progress: true,
+        center: true,
+        slideNumber: "c/t",
+        transition: "slide",
+        transitionSpeed: "default",
+        backgroundTransition: "fade",
+
+        // Fixed slide dimensions — reveal.js scales these to fit any screen
+        width: 1280,
+        height: 720,
+        margin: 0.04,
+        minScale: 0.1,
+        maxScale: 2.0,
+
+        // Auto-animate
+        autoAnimateEasing: "ease",
+        autoAnimateDuration: 0.8,
+        autoAnimateUnmatched: false,
+
+        // Keyboard shortcuts
+        keyboard: true,
+
+        // Overview mode
+        overview: true,
+
+        // Plugins
+        plugins: [],
+      });
+    </script>
+  </body>
+</html>
